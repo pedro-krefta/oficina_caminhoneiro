@@ -1,0 +1,12 @@
+### rota raiz
+GET http://localhost:3000/
+
+### teste cadastro Motorista
+POST http://localhost:3000/funcionario
+Content-Type: application/json
+
+{
+    "nome": "JONAS",
+    "email": "jonas@gmail.com",
+    "senha": "11122233344"
+}
