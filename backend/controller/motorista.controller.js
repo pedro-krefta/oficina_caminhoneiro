@@ -5,7 +5,6 @@ const chave = '123'
 const cadastrar = async(req,res)=>{
     const valores = req.body 
 
-    // testar cnh maiusculo e minusculo
     if(!valores.nome || !valores.cnh || !valores.cpf || !valores.telefone){
         return res.status(404).json({message: 'digite todos os dados corretamente'})
     }
@@ -54,7 +53,7 @@ const apagar = async(req,res)=>{
     const id = req.params.id
 
     try{
-        const dados = await Motorista.findByPk(id)
+        let dados = await Motorista.findByPk(id)
         if(!dados){
         return res.status(400).json({message: 'erro ao achar motorista'})
         }
@@ -68,7 +67,7 @@ const apagar = async(req,res)=>{
 
 const atualizar = async(req,res)=>{
     const valores = req.body
-    const id = req.body
+    const id = req.params.id
 
     try{
         let dados = await Motorista.findByPk(id)
@@ -93,7 +92,7 @@ const atualizar = async(req,res)=>{
             })
         }
     }catch(err){
-        res.status(400).json(message)
+        res.status(400).json({message: 'erro ao atualizar'})
     }
 }
 module.exports = {cadastrar,listar,consultar,apagar,atualizar}

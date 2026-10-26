@@ -1,12 +1,96 @@
-### rota raiz
-GET http://localhost:3000/
 
-### teste cadastro Motorista
-POST http://localhost:3000/funcionario
+@baseUrl = http://localhost:3000
+@token = {{login.response.body.token}}
+@codMotorista = 3
+@codCarga = 3
+
+### 1. Verificar se o servidor está funcionando
+GET {{baseUrl}}/
+
+### 2. Cadastrar funcionário
+# Execute uma vez antes de fazer login.
+# Use um email diferente se já houver um cadastro.
+POST {{baseUrl}}/funcionario
 Content-Type: application/json
 
 {
-    "nome": "JONAS",
-    "email": "jonas@gmail.com",
-    "senha": "11122233344"
+    "nome": "Funcionario Teste",
+    "email": "funcionario.teste@exemplo.com",
+    "senha": "SenhaTeste123"
 }
+
+### 3. Login do funcionário
+# @name login
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+    "email": "funcionario.teste@exemplo.com",
+    "senha": "SenhaTeste123"
+}
+
+### 4. Cadastrar motorista
+POST {{baseUrl}}/motorista
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "nome": "Carlos Teste",
+    "cnh": "12345678900",
+    "cpf": "12345678901",
+    "telefone": "47999990000"
+}
+
+### 5. Listar motoristas
+GET {{baseUrl}}/motoristas
+Authorization: {{token}}
+
+### 6. Consultar motorista pelo nome
+GET {{baseUrl}}/motorista/Carlos%20Teste
+Authorization: {{token}}
+
+### 7. Atualizar motorista pelo ID
+# Troque 1 pelo codMotorista real.
+PUT {{baseUrl}}/motorista/{{codMotorista}}
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "nome": "Carlos Teste Atualizado",
+    "cnh": "98765432100",
+    "cpf": "10987654321",
+    "telefone": "47988887777"
+}
+
+### 8. Cadastrar carga
+# Troque idMotorista pelo codMotorista de um motorista existente.
+POST {{baseUrl}}/carga
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "idMotorista": {{codMotorista}},
+    "descricao": "Entrega de caixas",
+    "codRastreio": "RASTREIO-001",
+    "peso": 150.5,
+    "volume": 2.5
+}
+
+### 9. Cadastrar entrega
+# Troque idCarga pelo codCarga de uma carga existente.
+POST {{baseUrl}}/entrega
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "idCarga": {{codCarga}},
+    "destino": "Itapema - SC",
+    "status": "TRANSITO",
+    "data": "2026-11-01",
+    "hora": "14:30:00"
+}
+
+### 10. Excluir motorista
+# Execute somente depois de testar a atualização.
+DELETE {{baseUrl}}/motorista/{{codMotorista}}
+Authorization: {{token}}
