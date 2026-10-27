@@ -14,7 +14,7 @@ POST {{baseUrl}}/funcionario
 Content-Type: application/json
 
 {
-    "nome": "Funcionario Teste",
+    "nome": "Funcionario Teste2",
     "email": "funcionario.teste@exemplo.com",
     "senha": "SenhaTeste123"
 }
@@ -35,7 +35,7 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-    "nome": "Carlos Teste",
+    "nome": "Carlos Teste3",
     "cnh": "12345678900",
     "cpf": "12345678901",
     "telefone": "47999990000"
@@ -71,7 +71,7 @@ Content-Type: application/json
 {
     "idMotorista": {{codMotorista}},
     "descricao": "Entrega de caixas",
-    "codRastreio": "RASTREIO-001",
+    "codRastreio": "RASTREIO-003",
     "peso": 150.5,
     "volume": 2.5
 }
@@ -84,7 +84,7 @@ Content-Type: application/json
 
 {
     "idCarga": {{codCarga}},
-    "destino": "Itapema - SC",
+    "destino": "tijucas - SC",
     "status": "TRANSITO",
     "data": "2026-11-01",
     "hora": "14:30:00"
